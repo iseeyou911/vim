@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='E:/home/tarifs'
+let g:netrw_dirhist_2='E:/home/tarifs/resources'
+let g:netrw_dirhist_3='E:/home/tarifs/resources/.svn'
+let g:netrw_dirhist_4='E:/home/tarifs/resources'
+let g:netrw_dirhist_5='E:/home/tarifs/resources/icons'
+let g:netrw_dirhist_6='E:/home/tarifs/resources'
