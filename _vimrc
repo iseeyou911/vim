@@ -1,4 +1,14 @@
 autocmd!
+
+let VIM_TMP_FOLDER = glob("~/.vimtmp")
+
+if !isdirectory(VIM_TMP_FOLDER)
+    call mkdir(VIM_TMP_FOLDER, "p", 0700)
+endif
+
+set udf
+let &udir=VIM_TMP_FOLDER
+let &dir=VIM_TMP_FOLDER
 set guifont=Consolas:h12
 set langmenu=en_US
 let $LANG = 'en_US'
@@ -15,7 +25,7 @@ set ff=unix
 filetype plugin indent on
 set noerrorbells visualbell t_vb=
 
-call plug#begin('~/vimfiles/plugged')
+call plug#begin(glob($HOME . '/vimfiles/plugged'))
 Plug 'git://github.com/jiangmiao/auto-pairs.git'
 Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/kien/ctrlp.vim.git'
@@ -49,23 +59,25 @@ let g:prettier#config#single_quote = 'true'
 let g:prettier#config#tab_width = 4
 
 let g:airline#extensions#ale#enabled = 1
-let g:ale_set_loclist = 1
+let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
+let g:ale_set_balloons = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'typecheck'],
 \}
-let g:UltiSnipsSnippetDirectories = ['C:/Users/iseey/UltiSnips', '~/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = [glob('~/UltiSnips'), 'UltiSnips']
 let g:UltiSnipsExpandTrigger="<c-tab>"
 
 set completeopt-=preview
 set wildignore+=*/node_modules/*,*.so,*.swp,*.zip 
-set runtimepath^=~/.vim/plugged/ctrlp.vim
 set backspace=indent,eol,start
+let NERDTreeShowBookmarks=1
+let g:NERDTreeChDirMode = 2
 
 if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers = {}
@@ -84,3 +96,7 @@ autocmd BufLeave,VimLeave *.js,*.jsx,*.ts,*.tsx,*.json :update
 autocmd BufEnter *.tsx set filetype=typescript
 autocmd BufEnter *.scss set tabstop=2 shiftwidth=2
 autocmd VimEnter * :NERDTree
+
+if !exists(":Explr")
+    command Explr :silent ! start explorer "%:p:h"
+endif
