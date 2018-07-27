@@ -1,6 +1,6 @@
 autocmd!
 
-let VIM_TMP_FOLDER = glob("~/.vimtmp")
+let VIM_TMP_FOLDER = resolve($HOME . "/.vimtmp")
 
 if !isdirectory(VIM_TMP_FOLDER)
     call mkdir(VIM_TMP_FOLDER, "p", 0700)
