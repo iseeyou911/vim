@@ -92,7 +92,8 @@ nmap <c-k> <c-w>k
 nmap <c-l> <c-w>l
 nmap <leader>b :CtrlPBuffer<CR>
 
-autocmd BufLeave,VimLeave *.js,*.jsx,*.ts,*.tsx,*.json :update
+autocmd BufWritePre ts,js,jsx,tsx :%s/\s\+$//e
+autocmd BufLeave,FocusLost,TabLeave,WinLeave *.js*,*.ts*,*.json :update
 autocmd BufEnter *.tsx set filetype=typescript
 autocmd BufEnter *.scss set tabstop=2 shiftwidth=2
 autocmd VimEnter * :NERDTree
